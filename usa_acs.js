@@ -96,7 +96,16 @@ $(document).ready(
 			function() {
 				alert('Ошибка при получении данных, обновите страницу.');
 			}
-		)
+		);
+
+		$('.state').on(
+			'click',
+			function(event) {
+				window.open(
+					STATESDATA[event.target.id].wikipedia
+				);
+			}
+		);
 	}
 );
 
@@ -167,7 +176,7 @@ calculateStatistics = function() {
 			if (STATESDATA[element.id]) {
 				opacity = (STATESDATA[element.id].score - minScore) / (maxScore - minScore);
 
-				element.style.fill = `rgb(0, 255, 0, ${opacity})`;
+				element.style.fill = `rgba(0, 255, 0, ${opacity})`;
 			}
 		}
 	);

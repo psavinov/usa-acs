@@ -1,5 +1,6 @@
 .state:hover {
-	fill: white !important;
+	fill: rgba(255, 0, 0, 0.7) !important;
+	cursor: pointer;
 }
 
 #USAMap {
@@ -16,6 +17,10 @@
 
 .stat-slider {
 	margin-top: 5px;
+}
+
+.footer {
+	margin-top: 30px;
 }
 
 .modal {
