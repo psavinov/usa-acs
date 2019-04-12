@@ -144,7 +144,7 @@ calculateStatistics = function() {
 
 			map[stateKey] = {
 				name: state[0],
-				wikipedia: `http://ru.wikipedia.org/wiki/${state[0]}`,
+				wikipedia: `http://wikipedia.org/wiki/${state[0]}`,
 				blackPopulation: (state[2] / state[1]),
 				whitePopulation: (state[3] / state[1]),
 				asianPopulation: (state[4] / state[1]),
