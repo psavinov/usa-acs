@@ -136,7 +136,8 @@ calculateStatistics = function() {
 	);
 
 	var maxScore = 0;
-	var minScore = 1000;
+	var minScore = 10000000;
+	var scores = [];
 
 	STATESDATA = RAWDATA.reduce(
 		function(map, state) {
@@ -144,20 +145,22 @@ calculateStatistics = function() {
 
 			map[stateKey] = {
 				name: state[0],
-				wikipedia: `http://wikipedia.org/wiki/${state[0]}`,
+				wikipedia: `http://wikipedia.org/wiki/${state[0]} штат`,
 				blackPopulation: (state[2] / state[1]),
 				whitePopulation: (state[3] / state[1]),
 				asianPopulation: (state[4] / state[1]),
 				latinPopulation: (state[5] / state[1]),
 				publicTransport: (state[6] / state[1]),
-				giniIndex: -1 * Number(state[7]),
+				giniIndex: -5 * Number(state[7]),
 				medianIncome: Number(state[8]) / maxIncome,
-				employment: (state[9] / state[1]),
-				houseRent: (state[10] / state[1]),
-				exUssrBorn: ((Number(state[11]) + Number(state[12]) + Number(state[13])) / state[1])
+				employment: 5 * (state[9] / state[1]),
+				houseRent: 5 * (state[10] / state[1]),
+				exUssrBorn: 100 * ((Number(state[11]) + Number(state[12]) + Number(state[13])) / state[1])
 			};
 
 			map[stateKey].score = calculateScore(map[stateKey]);
+
+			scores.push(map[stateKey].score);
 
 			if (map[stateKey].score > maxScore) {
 				maxScore = map[stateKey].score;
@@ -174,7 +177,7 @@ calculateStatistics = function() {
 	$('.state').each(
 		function(idx, element) {
 			if (STATESDATA[element.id]) {
-				opacity = (STATESDATA[element.id].score - minScore) / (maxScore - minScore);
+				opacity = (STATESDATA[element.id].score - getMean(scores)) / getSD(scores);
 
 				element.style.fill = `rgba(0, 255, 0, ${opacity})`;
 			}
@@ -190,4 +193,18 @@ calculateScore = function(state) {
 	}
 
 	return score;
+};
+
+getMean = function(array) {
+    return array.reduce(function (a, b) {
+        return Number(a) + Number(b);
+    }) / array.length;
+};
+
+getSD = function(array) {
+	var mean = getMean(array);
+	
+    return Math.sqrt(array.reduce(function (sq, n) {
+            return sq + Math.pow(n - mean, 2);
+        }, 0) / (array.length - 1));
 };
