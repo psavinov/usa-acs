@@ -151,11 +151,11 @@ calculateStatistics = function() {
 				asianPopulation: (state[4] / state[1]),
 				latinPopulation: (state[5] / state[1]),
 				publicTransport: (state[6] / state[1]),
-				giniIndex: -5 * Number(state[7]),
+				giniIndex: -3 * Number(state[7]),
 				medianIncome: Number(state[8]) / maxIncome,
-				employment: 5 * (state[9] / state[1]),
-				houseRent: 5 * (state[10] / state[1]),
-				exUssrBorn: 100 * ((Number(state[11]) + Number(state[12]) + Number(state[13])) / state[1])
+				employment: 2 * (state[9] / state[1]),
+				houseRent: 2 * (state[10] / state[1]),
+				exUssrBorn: 10 * ((Number(state[11]) + Number(state[12]) + Number(state[13])) / state[1])
 			};
 
 			map[stateKey].score = calculateScore(map[stateKey]);
